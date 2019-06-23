@@ -1,23 +1,23 @@
 #!/bin/bash
 
-wrong="\e[1;93m[\e[92m!\e[93m] You're not qualified!\e[0m"
-error="\e[1;93m[\e[92m!\e[93m] Something's wrong!\e[0m"
+wrong="\e[1;93m[\e[91m!\e[93m] You're not qualified!\e[0m"
+error="\e[1;93m[\e[91m!\e[93m] Something's wrong!\e[0m"
 
 clear
-echo -ne "\e[1;97mIs this a factory Raspberry Pi 3? (\e[96my\e[97m/\e[96mn): \e[0m"
+echo -ne "\e[1;97mIs this a factory Raspberry Pi 3? (\e[96my\e[97m/\e[96mn\e[97m): \e[0m"
 read check1
 echo ""
 
-if [ $check1 = n ]; then
+if [ $check1 != y ]; then
 	echo -e "$wrong"
 	exit
 fi
 
-echo -ne "\e[1:97mAre you sure you want to turn your Raspberry Pi into a WiFi hotspot? (\e[96my\e[97m/\e[96mn): \e[0m"
-read check 2
+echo -ne "\e[1:97mAre you sure you want to turn your Raspberry Pi into a WiFi hotspot? (\e[96my\e[97m/\e[96mn\e[97m): \e[0m"
+read check2
 echo ""
 
-if [ $check2 = n ]; then
+if [ $check2 != y ]; then
 	echo -e "$wrong"
 	exit
 fi
@@ -61,6 +61,7 @@ fi
 
 echo ""
 echo -e "\e[1;97mAfter installation, type raspi-webgui\e[0m"
+read pause
 
 wget -q https://git.io/voEUQ -O /tmp/raspap && bash /tmp/raspap
 
